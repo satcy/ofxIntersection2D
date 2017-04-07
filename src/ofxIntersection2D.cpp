@@ -35,10 +35,11 @@ namespace ofxIntersection2D {
         if ( bundo == 0 ) {// heikou
             return ofVec2f();
         }
+        double vectorAC_x = c.x - a.x;
+        double vectorAC_y = c.y - a.y;
         
-        ofVec2f vectorAC = ofVec2f( c.x - a.x, c.y - a.y );
-        double dR = ( ( d.y - c.y ) * vectorAC.x - ( d.x - c.x ) * vectorAC.y ) / bundo;
-        double dS = ( ( b.y - a.y ) * vectorAC.x - ( b.x - a.x ) * vectorAC.y ) / bundo;
+        double dR = ( ( d.y - c.y ) * vectorAC_x - ( d.x - c.x ) * vectorAC_y ) / bundo;
+        double dS = ( ( b.y - a.y ) * vectorAC_x - ( b.x - a.x ) * vectorAC_y ) / bundo;
         
         return ofVec2f( a.x + dR * ( b.x - a.x ), a.y + dR * ( b.y - a.y ));
     }
