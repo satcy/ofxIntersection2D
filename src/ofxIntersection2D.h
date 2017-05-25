@@ -14,4 +14,5 @@ namespace ofxIntersection2D {
     bool crossLine(ofVec2f & a, ofVec2f & b, ofVec2f & c, ofVec2f & d);
     ofVec2f crossLinePoint(ofVec2f & a, ofVec2f & b, ofVec2f & c, ofVec2f & d);
     ofVec3f mirror(ofVec3f p, ofVec3f a, ofVec3f b);
+    double distancePointToLine(const ofVec2f & p, const ofVec2f & a, const ofVec2f & b);
 };

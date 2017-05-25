@@ -67,4 +67,12 @@ namespace ofxIntersection2D {
         - Ty*cos(2.0*Angle) + Hy;
         return p1;
     }
+    
+    double distancePointToLine(const ofVec2f & p, const ofVec2f & a, const ofVec2f & b){
+        ofVec2f v0 = b - a;
+        ofVec2f v1 = p - a;
+        
+        double area = v1.x * v0.y - v1.y * v0.x;
+        return area / hypot(v0.x, v0.y);
+    }
 };
