@@ -15,4 +15,5 @@ namespace ofxIntersection2D {
     ofVec2f crossLinePoint(ofVec2f & a, ofVec2f & b, ofVec2f & c, ofVec2f & d);
     ofVec3f mirror(ofVec3f p, ofVec3f a, ofVec3f b);
     double distancePointToLine(const ofVec2f & p, const ofVec2f & a, const ofVec2f & b);
+    vector<ofVec3f> getTriangleCircumscribedCircle(const ofVec2f & center, float radius, float start_radian, float wide_radian, float rate);
 };

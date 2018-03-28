@@ -75,4 +75,36 @@ namespace ofxIntersection2D {
         double area = v1.x * v0.y - v1.y * v0.x;
         return area / hypot(v0.x, v0.y);
     }
+    
+    vector<ofVec3f> getTriangleCircumscribedCircle(const ofVec2f & center, float radius, float start_radian, float wide_radian, float rate) {
+        float r1 = start_radian;
+        float r2 = start_radian + ofClamp(wide_radian * rate, 0.1, PI-0.1);
+        wide_radian = ofClamp(wide_radian, PI+0.1, r2-r1+PI-0.1);
+        float r3 = start_radian + wide_radian;
+        
+        ofVec2f p1 = ofVec2f(cos(r1)*radius + center.x, sin(r1)*radius + center.y);
+        ofVec2f p2 = ofVec2f(cos(r2)*radius + center.x, sin(r2)*radius + center.y);
+        ofVec2f p3 = ofVec2f(cos(r3)*radius + center.x, sin(r3)*radius + center.y);
+        const static float NEEDLE = 0xffffff;
+        ofVec2f v1_1 = ofVec2f( cos(r1 + PI*0.5)*NEEDLE + p1.x, sin(r1 + PI*0.5)*NEEDLE + p1.y );
+        ofVec2f v1_2 = ofVec2f( cos(r1 - PI*0.5)*NEEDLE + p1.x, sin(r1 - PI*0.5)*NEEDLE + p1.y );
+        
+        ofVec2f v2_1 = ofVec2f( cos(r2 + PI*0.5)*NEEDLE + p2.x, sin(r2 + PI*0.5)*NEEDLE + p2.y );
+        ofVec2f v2_2 = ofVec2f( cos(r2 - PI*0.5)*NEEDLE + p2.x, sin(r2 - PI*0.5)*NEEDLE + p2.y );
+        
+        ofVec2f v3_1 = ofVec2f( cos(r3 + PI*0.5)*NEEDLE + p3.x, sin(r3 + PI*0.5)*NEEDLE + p3.y );
+        ofVec2f v3_2 = ofVec2f( cos(r3 - PI*0.5)*NEEDLE + p3.x, sin(r3 - PI*0.5)*NEEDLE + p3.y );
+        
+        
+        ofVec2f c1 = crossLinePoint(v1_1, v1_2, v2_1, v2_2);
+        ofVec2f c2 = crossLinePoint(v1_1, v1_2, v3_1, v3_2);
+        ofVec2f c3 = crossLinePoint(v3_1, v3_2, v2_1, v2_2);
+        
+        vector<ofVec3f> arr;
+        arr.emplace_back(c1);
+        arr.emplace_back(c2);
+        arr.emplace_back(c3);
+        
+        return arr;
+    }
 };
